@@ -114,7 +114,7 @@ def DetectChecklist(img, options):
 		if detection['class_name'] == 'year' and 'checkbox' in options:
 			year_str = str(recognize_text_from_image(detection_area))
 			cv2.rectangle(img, (left, top), (right, bottom), (255, 255, 255), thickness=cv2.FILLED)
-			cv2.putText(img, year_str, (left, bottom), cv2.FONT_HERSHEY_COMPLEX, 3, (0, 0, 0), 2)
+			cv2.putText(img, year_str, (left, bottom), cv2.FONT_HERSHEY_SIMPLEX, 2.5, (0, 0, 0), 2)
 
 		detected_cards.append([left, top, right, bottom])
 	h, w = img.shape[:2]
@@ -149,10 +149,9 @@ def preprocesser(input_dir, options):
 			# Convert RGB to BGR (since OpenCV uses BGR format)
 			open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_RGB2BGR)
 			open_cv_images.append(open_cv_image)
-			img = DetectChecklist(open_cv_image, options)
-	
-				
+			img = DetectChecklist(open_cv_image, options)	
 		images_to_pdf(open_cv_images, os.path.join(input_dir, input_file))
+	return True
 
 
 

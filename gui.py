@@ -1,7 +1,8 @@
 import tkinter as tk
 import customtkinter as ctk
 from tkinter import filedialog
-
+from tkinter import messagebox
+from gui_process import preprocesser
 
 input_folder = ""
 checkbox_recognition = False
@@ -28,6 +29,7 @@ def select_file():
 
 # Function to open a folder dialog and display the selected folder path in the input field
 def select_folder():
+    global input_folder
     folder_path = filedialog.askdirectory(
         title="Select a Folder"
     )
@@ -49,6 +51,19 @@ def onClickYearOpt():
     elif 'year' in options:
         options.remove('year')
     print("options:", options)
+
+def onClickPreprocess():
+    print(input_folder)
+    if input_folder != '' and options != []:
+        result = preprocesser(input_dir=input_folder, options=options)
+        if result:
+            messagebox.showinfo("Preprocesser", "All documents are processed.")
+        else:
+            messagebox.showerror("Preprocesser", "The unknown error occured.")
+    else:
+        messagebox.showwarning("Preprocesser", "Please select file, folder and option.")
+    
+    
 ###############################################################
 # Create a folder_dialog_frame using grid layout manager
 ###############################################################
@@ -126,8 +141,7 @@ operation_frame.grid_columnconfigure(0, weight=1)
 # operation_title = ctk.CTkLabel(operation_frame, text="Select the options for preprocess of OCRmyPDF.", font=("Helvetica", 16), anchor="w")
 # operation_title.grid(row=0, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
-def onClickPreprocess():
-    print("Process button pressed")
+
 
 btn_preprocess = ctk.CTkButton(operation_frame, text="Process", command=onClickPreprocess)
 btn_preprocess.grid(row=1, column=3, padx=5, pady=5, sticky="ew")

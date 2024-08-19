@@ -111,10 +111,10 @@ def DetectChecklist(img, options):
 	
 		if detection['class_name'] == 'chklist' and 'checkbox' in options:
 			chkboxes = Box_Classifier(detection_area)
-		if detection['class_name'] == 'year' and 'checkbox' in options:
+		if detection['class_name'] == 'year' and 'year' in options:
 			year_str = str(recognize_text_from_image(detection_area))
 			cv2.rectangle(img, (left, top), (right, bottom), (255, 255, 255), thickness=cv2.FILLED)
-			cv2.putText(img, year_str, (left, bottom), cv2.FONT_HERSHEY_SIMPLEX, 2.5, (0, 0, 0), 2)
+			cv2.putText(img, year_str, (left, bottom), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 2)
 
 		detected_cards.append([left, top, right, bottom])
 	h, w = img.shape[:2]
@@ -132,7 +132,7 @@ def images_to_pdf(image_files, output_pdf):
     # Save the first image and append the rest as additional pages
     pil_images[0].save(output_pdf, save_all=True, append_images=pil_images[1:])
 
-def preprocesser(input_dir, options):
+def preprocesser_folder(input_dir, options):
 	ls_files = list_files(input_dir)
 	for input_file in ls_files:
 		inputFilename = os.path.join(input_dir, input_file)
@@ -154,7 +154,22 @@ def preprocesser(input_dir, options):
 	return True
 
 
-
+def preprocesser_file(input_file, options):
+	# Convert PDF to images
+ 
+	Image.MAX_IMAGE_PIXELS = None
+	images = convert_from_path(input_file)
+	open_cv_images = []
+	# Save each page as an image file
+	for i, img in enumerate(images):
+		# Convert the PIL image to a NumPy array
+		open_cv_image = np.array(img)
+		# Convert RGB to BGR (since OpenCV uses BGR format)
+		open_cv_image = cv2.cvtColor(open_cv_image, cv2.COLOR_RGB2BGR)
+		open_cv_images.append(open_cv_image)
+		img = DetectChecklist(open_cv_image, options)	
+	images_to_pdf(open_cv_images, input_file)
+	return True
 
 
 

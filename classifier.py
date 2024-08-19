@@ -80,13 +80,13 @@ def Box_Classifier(img):
 			cv2.rectangle(img, (left, top), (right, bottom), (255, 255, 255), thickness=cv2.FILLED)
 			# Draw the red border around the white rectangle
 			# cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), thickness=2)
-			cv2.putText(img, "chx", (left+5, bottom-10), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 0), 1)
+			cv2.putText(img, "chx", (left+5, bottom-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 1)
 		else: 
 			# Create a white rectangle on a copy of the image
 			cv2.rectangle(img, (left, top), (right, bottom), (255, 255, 255), thickness=cv2.FILLED)
 			# Draw the red border around the white rectangle
 			# cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), thickness=2)
-			cv2.putText(img, "cho", (left+5, bottom-10), cv2.FONT_HERSHEY_COMPLEX, 0.7, (0, 0, 0), 1)
+			cv2.putText(img, "cho", (left+5, bottom-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 1)
 
 	# cv2.imshow("Test", cv2.resize(img, (int(w*2), int(h*2))))
 	# cv2.waitKey(0)

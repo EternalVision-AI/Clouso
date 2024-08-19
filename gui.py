@@ -2,9 +2,10 @@ import tkinter as tk
 import customtkinter as ctk
 from tkinter import filedialog
 from tkinter import messagebox
-from gui_process import preprocesser
+from gui_process import preprocesser_folder, preprocesser_file
 
 input_folder = ""
+input_file = ""
 checkbox_recognition = False
 year_recognition = False
 options = []
@@ -20,12 +21,14 @@ app.title("Preprocess for OCRmyPDF")
 
 # Function to open a file dialog and display the selected file path in the input field
 def select_file():
+    global input_file
     file_path = filedialog.askopenfilename(
         title="Select a File",
         filetypes=[("All Files", "*.*")]
     )
     if file_path:
         file_input_var.set(file_path)
+        input_file = file_path
 
 # Function to open a folder dialog and display the selected folder path in the input field
 def select_folder():
@@ -55,7 +58,13 @@ def onClickYearOpt():
 def onClickPreprocess():
     print(input_folder)
     if input_folder != '' and options != []:
-        result = preprocesser(input_dir=input_folder, options=options)
+        result = preprocesser_folder(input_dir=input_folder, options=options)
+        if result:
+            messagebox.showinfo("Preprocesser", "All documents are processed.")
+        else:
+            messagebox.showerror("Preprocesser", "The unknown error occured.")
+    elif input_file != '' and options != []:
+        result = preprocesser_file(input_file=input_file, options=options)
         if result:
             messagebox.showinfo("Preprocesser", "All documents are processed.")
         else:
@@ -113,12 +122,12 @@ option_title.grid(row=0, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 
 check_opt_var = ctk.StringVar(value="off")
-checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
+checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox (W-2 Form)", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
 checkbox_opt.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 
 check_opt_var = ctk.StringVar(value="off")
-checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
+checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox (W-2 Form)", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
 checkbox_opt.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 year_opt_var = ctk.StringVar(value="off")

@@ -2,10 +2,11 @@ import tkinter as tk
 import customtkinter as ctk
 from tkinter import filedialog
 
+
+input_folder = ""
 checkbox_recognition = False
 year_recognition = False
-
-
+options = []
 
 
 ctk.set_appearance_mode("System")  # Modes: system (default), light, dark
@@ -32,12 +33,22 @@ def select_folder():
     )
     if folder_path:
         folder_input_var.set(folder_path)
+        input_folder = folder_path
+        print(input_folder)
         
 def onClickCheckboxOpt():
-    print("checkbox:", check_opt_var.get())
+    if check_opt_var.get() == 'on':
+        options.append('checkbox')
+    elif 'checkbox' in options:
+        options.remove('checkbox')
+    print("options:", options)
     
 def onClickYearOpt():
-    print("checkbox:", check_opt_var.get())
+    if year_opt_var.get() == 'on':
+        options.append('year')
+    elif 'year' in options:
+        options.remove('year')
+    print("options:", options)
 ###############################################################
 # Create a folder_dialog_frame using grid layout manager
 ###############################################################

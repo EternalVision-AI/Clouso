@@ -10,13 +10,27 @@ checkbox_recognition = False
 year_recognition = False
 options = []
 
+def center_window(root, width=300, height=200):
+    # Get screen width and height
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
 
+    # Calculate position x, y to center the window
+    x = (screen_width - width) // 2
+    y = (screen_height - height) // 2
+
+    # Set the dimensions and position of the window
+    root.geometry(f'{width}x{height}+{x}+{y}')
 ctk.set_appearance_mode("System")  # Modes: system (default), light, dark
 ctk.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
 app = ctk.CTk()  # create CTk window like you do with the Tk window
-app.geometry("700x500")
+window_width = 700
+window_height = 500
+
 app.title("Preprocess for OCRmyPDF")
+center_window(app, window_width, window_height)
+
 
 
 # Function to open a file dialog and display the selected file path in the input field
@@ -72,7 +86,7 @@ def onClickPreprocess():
     else:
         messagebox.showwarning("Preprocesser", "Please select file, folder and option.")
     
-    
+
 ###############################################################
 # Create a folder_dialog_frame using grid layout manager
 ###############################################################

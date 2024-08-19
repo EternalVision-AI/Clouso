@@ -2,6 +2,12 @@ import tkinter as tk
 import customtkinter as ctk
 from tkinter import filedialog
 
+checkbox_recognition = False
+year_recognition = False
+
+
+
+
 ctk.set_appearance_mode("System")  # Modes: system (default), light, dark
 ctk.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
 
@@ -9,8 +15,6 @@ app = ctk.CTk()  # create CTk window like you do with the Tk window
 app.geometry("700x500")
 app.title("Preprocess for OCRmyPDF")
 
-def button_function():
-    print("button pressed")
 
 # Function to open a file dialog and display the selected file path in the input field
 def select_file():
@@ -29,7 +33,11 @@ def select_folder():
     if folder_path:
         folder_input_var.set(folder_path)
         
-
+def onClickCheckboxOpt():
+    print("checkbox:", check_opt_var.get())
+    
+def onClickYearOpt():
+    print("checkbox:", check_opt_var.get())
 ###############################################################
 # Create a folder_dialog_frame using grid layout manager
 ###############################################################
@@ -76,13 +84,20 @@ option_frame.grid_columnconfigure(0, weight=1)
 option_title = ctk.CTkLabel(option_frame, text="Select the options for preprocessing of OCRmyPDF.", font=("Helvetica", 16), anchor="w")
 option_title.grid(row=0, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
-def onClickCheckboxOpt():
-    print("checkbox:", check_opt_var.get())
+
 
 check_opt_var = ctk.StringVar(value="off")
 checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
 checkbox_opt.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
+
+check_opt_var = ctk.StringVar(value="off")
+checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
+checkbox_opt.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
+
+year_opt_var = ctk.StringVar(value="off")
+year_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Year", command=onClickYearOpt, variable=year_opt_var, onvalue="on", offvalue="off")
+year_opt.grid(row=2, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 # Configure columns to expand properly
 option_frame.columnconfigure(0, weight=1)
 option_frame.columnconfigure(1, weight=1)

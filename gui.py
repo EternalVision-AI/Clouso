@@ -134,18 +134,12 @@ option_title = ctk.CTkLabel(option_frame, text="Select the options for preproces
 option_title.grid(row=0, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 
-
-check_opt_var = ctk.StringVar(value="off")
-checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox (W-2 Form)", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
-checkbox_opt.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
-
-
 check_opt_var = ctk.StringVar(value="off")
 checkbox_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Checkbox (W-2 Form)", command=onClickCheckboxOpt, variable=check_opt_var, onvalue="on", offvalue="off")
 checkbox_opt.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 year_opt_var = ctk.StringVar(value="off")
-year_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Year", command=onClickYearOpt, variable=year_opt_var, onvalue="on", offvalue="off")
+year_opt = ctk.CTkCheckBox(option_frame, text="Recognition for Year (W-2 Form)", command=onClickYearOpt, variable=year_opt_var, onvalue="on", offvalue="off")
 year_opt.grid(row=2, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 # Configure columns to expand properly
 option_frame.columnconfigure(0, weight=1)

@@ -121,7 +121,7 @@ def add_searchable_text_layer(input_pdf, output_pdf, add_text):
 					# Position where the text should be inserted (e.g., top-left corner)
           position = (text[0], text[1])  # Change according to your needs 225
 					# left, top, right, bottom
-          page.insert_text(position, text[2], fontsize=12, set_simple=True, render_mode=3)
+          page.insert_text(position, text[2], fontsize=10, set_simple=True, render_mode=3)
 
     # Save the new PDF with the added text layer
     pdf_document.save(output_pdf, garbage=4, deflate=True, clean=True)
@@ -190,10 +190,10 @@ def DetectChecklist(img, input_file, options):
 		if detection['class_name'] == 'chklist' and 'checkbox' in options:
 			# cv2.putText(img, str((left, bottom)), (left, bottom), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 2)
 			checkbox_text = Box_Classifier(detection_area)
-			add_text.append([left, bottom, checkbox_text])
+			add_text.append([int((left+right)/2), bottom, checkbox_text])
 		if detection['class_name'] == 'year' and 'year' in options:
 			year_text = str(recognize_text_from_image(detection_area))
-			add_text.append([left, bottom, year_text])
+			add_text.append([int((left+right)/2), bottom, year_text])
 	directory_path, filename = os.path.split(input_file)
 	# Define the new directory path
 	processed_directory = directory_path + "_boosted"

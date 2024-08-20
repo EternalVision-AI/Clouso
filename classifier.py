@@ -63,6 +63,7 @@ def DetectionProcess(original_image):
 def Box_Classifier(img):
 	detections = DetectionProcess(img)
 	detected_areas = []
+	checkbox_text=""
 	for detection in detections:
 		class_id, class_name, confidence, box, scale = \
 			detection['class_id'], detection['class_name'], detection['confidence'], detection['box'], detection[
@@ -74,26 +75,23 @@ def Box_Classifier(img):
 		if right>img.shape[1]: right = img.shape[1] - 1
 		if bottom>img.shape[0]: bottom = img.shape[0] - 1
 		
-		detected_areas.append([(left, top, right, bottom), detection['class_name']])
-		if detection['class_name'] == 'chk': 
-			# Create a white rectangle on a copy of the image
-			cv2.rectangle(img, (left, top), (right, bottom), (255, 255, 255), thickness=cv2.FILLED)
-			# Draw the red border around the white rectangle
-			# cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), thickness=2)
-			cv2.putText(img, "chx", (left+5, bottom-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 1)
-		else: 
-			# Create a white rectangle on a copy of the image
-			cv2.rectangle(img, (left, top), (right, bottom), (255, 255, 255), thickness=cv2.FILLED)
-			# Draw the red border around the white rectangle
-			# cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), thickness=2)
-			cv2.putText(img, "cho", (left+5, bottom-10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 1)
+		detected_areas.append([left, detection['class_name']])
+  
+	# Sort detected_areas by the 'left' coordinate
+	detected_areas.sort(key=lambda x: x[0])
+
+	for checkbox in detected_areas:
+		# print("detection['class_name']")
+		# print(checkbox[0])
+		if checkbox[1] == 'chk': 
+			checkbox_text = checkbox_text + "1 "
+		elif checkbox[1] == 'nochk': 
+			checkbox_text = checkbox_text + "0 "
 
 	# cv2.imshow("Test", cv2.resize(img, (int(w*2), int(h*2))))
 	# cv2.waitKey(0)
 	# Sort the detected_areas by the 'left' value of the bounding boxes
-	detected_areas.sort(key=lambda x: x[0][0], reverse=True)  # Sort by the 'left' value (first element of the bounding box tuple)
-	print(detected_areas)
-	return detected_areas
+	return checkbox_text
 
 
 

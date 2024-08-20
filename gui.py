@@ -28,7 +28,7 @@ app = ctk.CTk()  # create CTk window like you do with the Tk window
 window_width = 700
 window_height = 500
 
-app.title("Preprocess for OCRmyPDF")
+app.title("OCRmyPDF Boost 1.0")
 center_window(app, window_width, window_height)
 
 
@@ -96,7 +96,7 @@ folder_dialog_frame.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
 folder_dialog_frame.grid_columnconfigure(0, weight=1)
 
 
-title = ctk.CTkLabel(folder_dialog_frame, text="Preprocess for OCRmyPDF", font=("Helvetica", 24))
+title = ctk.CTkLabel(folder_dialog_frame, text="OCRmyPDF Boost 1.0", font=("Helvetica", 24))
 title.grid(row=0, column=0, padx=10, pady=10, sticky="ew", columnspan=4)
 
 # Create and place buttons, input fields, and labels
@@ -130,7 +130,7 @@ option_frame = ctk.CTkFrame(app)
 option_frame.grid(row=1, column=0, padx=10, pady=(5, 5), sticky="nsew")
 option_frame.grid_columnconfigure(0, weight=1)
 
-option_title = ctk.CTkLabel(option_frame, text="Select the options for preprocessing of OCRmyPDF.", font=("Helvetica", 16), anchor="w")
+option_title = ctk.CTkLabel(option_frame, text="Select the options for processing of OCRmyPDF.", font=("Helvetica", 16), anchor="w")
 option_title.grid(row=0, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 

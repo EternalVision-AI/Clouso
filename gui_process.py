@@ -195,13 +195,13 @@ def DetectChecklist(img, input_file, options):
 			year_text = str(recognize_text_from_image(detection_area))
 			add_text.append([left, bottom, year_text])
 	directory_path, filename = os.path.split(input_file)
-	output_file = directory_path+"_processed/"+filename
 	# Define the new directory path
-	processed_directory = directory_path + "_processed"
+	processed_directory = directory_path + "_boosted"
 
 	# Create the new directory if it doesn't exist
 	if not os.path.exists(processed_directory):
 			os.makedirs(processed_directory)
+	output_file = processed_directory+"/"+filename
  
 	add_searchable_text_layer(input_file, output_file, add_text)
 

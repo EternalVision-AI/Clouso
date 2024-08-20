@@ -235,7 +235,6 @@ def preprocesser_file(input_file, options):
  
 	Image.MAX_IMAGE_PIXELS = None
 	images = pdf_to_images(input_file)
-	open_cv_images = []
 	# Save each page as an image file
 	for i, open_cv_image in enumerate(images):
 		DetectChecklist(open_cv_image, input_file, options)	

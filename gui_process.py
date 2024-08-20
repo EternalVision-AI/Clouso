@@ -2,7 +2,7 @@ import cv2
 import os
 import numpy as np
 from PIL import Image
-
+import re
 
 from paddleocr import PaddleOCR
 from classifier import Box_Classifier
@@ -116,12 +116,22 @@ def add_searchable_text_layer(input_pdf, output_pdf, add_text):
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         for text in add_text:
+          
           print(add_text)
           print(text)
 					# Position where the text should be inserted (e.g., top-left corner)
-          position = (text[0], text[1])  # Change according to your needs 225
+          position = (text[0], text[3])  # Change according to your needs 225
 					# left, top, right, bottom
-          page.insert_text(position, text[2], fontsize=6, set_simple=True, render_mode=3)
+          if text[5] == 'chklist':
+            page.insert_text(position, text[4], fontsize=6, set_simple=True, render_mode=3)
+          elif text[5] == 'year':
+            rect = fitz.Rect(text[0]-20, text[1]-20, text[2]+20, text[3]+20)
+            # Extract text from the specified rectangular area
+            original_year_text = page.get_text("text", clip=rect)
+            number_str = re.search(r'\d+', text[4]).group()
+            if number_str not in original_year_text:
+              
+              page.insert_text(position, number_str, fontsize=6, set_simple=True, render_mode=3)
 
     # Save the new PDF with the added text layer
     pdf_document.save(output_pdf, garbage=4, deflate=True, clean=True)
@@ -194,10 +204,10 @@ def DetectChecklist(img, input_file, options):
 			# cv2.putText(img, str((left, bottom)), (left, bottom), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 0, 0), 2)
 			checkbox_text = Box_Classifier(detection_area)
 	
-			add_text.append([modified_left, bottom-5, checkbox_text])
+			add_text.append([modified_left, top, right, bottom-5, checkbox_text, 'chklist'])
 		if detection['class_name'] == 'year' and 'year' in options:
 			year_text = str(recognize_text_from_image(detection_area))
-			add_text.append([modified_left, bottom-5, year_text])
+			add_text.append([modified_left, top, right, bottom-5, year_text, 'year'])
 	directory_path, filename = os.path.split(input_file)
 	# Define the new directory path
 	processed_directory = directory_path + "_boosted"

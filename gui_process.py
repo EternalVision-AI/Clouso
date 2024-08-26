@@ -19,7 +19,7 @@ recognition_classes = ['chklist', 'year']
 confThreshold = 0.3 # Confidence threshold
 nmsThreshold = 0.5 # Non-maximum suppression threshold
 dir_path = os.path.dirname(os.path.realpath(__file__))
-detection_model = cv2.dnn.readNetFromONNX(dir_path + "/models/checkbox_detector_model.onnx")
+detection_model = cv2.dnn.readNetFromONNX("checkbox_detector_model.onnx")
 
 
 def list_files(path):

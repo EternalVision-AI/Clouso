@@ -28,7 +28,7 @@ app = ctk.CTk()  # create CTk window like you do with the Tk window
 window_width = 700
 window_height = 500
 
-app.title("OCRmyPDF Boost 1.0")
+app.title("Optova Detector 1.0")
 center_window(app, window_width, window_height)
 
 
@@ -74,17 +74,17 @@ def onClickPreprocess():
     if input_folder != '' and options != []:
         result = preprocesser_folder(input_dir=input_folder, options=options)
         if result:
-            messagebox.showinfo("Preprocesser", "All documents are processed.")
+            messagebox.showinfo("Optova Detector", "All documents are processed.")
         else:
-            messagebox.showerror("Preprocesser", "The unknown error occured.")
+            messagebox.showerror("Optova Detector", "The unknown error occured.")
     elif input_file != '' and options != []:
         result = preprocesser_file(input_file=input_file, options=options)
         if result:
-            messagebox.showinfo("Preprocesser", "All documents are processed.")
+            messagebox.showinfo("Optova Detector", "All documents are processed.")
         else:
-            messagebox.showerror("Preprocesser", "The unknown error occured.")
+            messagebox.showerror("Optova Detector", "The unknown error occured.")
     else:
-        messagebox.showwarning("Preprocesser", "Please select file, folder and option.")
+        messagebox.showwarning("Optova Detector", "Please select file, folder and option.")
     
 
 ###############################################################
@@ -96,7 +96,7 @@ folder_dialog_frame.grid(row=0, column=0, padx=10, pady=(10, 5), sticky="nsew")
 folder_dialog_frame.grid_columnconfigure(0, weight=1)
 
 
-title = ctk.CTkLabel(folder_dialog_frame, text="OCRmyPDF Boost 1.0", font=("Helvetica", 24))
+title = ctk.CTkLabel(folder_dialog_frame, text="Optova Detector 1.0", font=("Helvetica", 24))
 title.grid(row=0, column=0, padx=10, pady=10, sticky="ew", columnspan=4)
 
 # Create and place buttons, input fields, and labels
@@ -130,7 +130,7 @@ option_frame = ctk.CTkFrame(app)
 option_frame.grid(row=1, column=0, padx=10, pady=(5, 5), sticky="nsew")
 option_frame.grid_columnconfigure(0, weight=1)
 
-option_title = ctk.CTkLabel(option_frame, text="Select the options for processing of OCRmyPDF.", font=("Helvetica", 16), anchor="w")
+option_title = ctk.CTkLabel(option_frame, text="Select the options for detection.", font=("Helvetica", 16), anchor="w")
 option_title.grid(row=0, column=0, padx=5, pady=5, sticky="ew", columnspan=4)
 
 

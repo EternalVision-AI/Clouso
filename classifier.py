@@ -12,7 +12,7 @@ recognition_classes = ['chk', 'nochk']
 confThreshold = 0.5  # Confidence threshold
 nmsThreshold = 0.6 # Non-maximum suppression threshold
 dir_path = os.path.dirname(os.path.realpath(__file__))
-detection_model = cv2.dnn.readNetFromONNX(dir_path + "/models/checkbox_classifier_model.onnx")
+detection_model = cv2.dnn.readNetFromONNX("checkbox_classifier_model.onnx")
 
 
 def DetectionProcess(original_image):
